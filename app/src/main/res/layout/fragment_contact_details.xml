@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/contactDetailsImg"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="4dp"
+            android:contentDescription="@string/contact_image"
+            app:srcCompat="@android:mipmap/sym_def_app_icon"/>
+
+        <TextView
+            android:id="@+id/contactDetailsName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/contact_name"
+            android:textColor="@android:color/black"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="119dp"
+        android:background="@color/colorBackroundCD"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/contactDetailsPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/phone_number"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"/>
+
+        <TextView
+            android:id="@+id/contactDetailsPhoneNumber2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/phone_number_2"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"/>
+
+        <TextView
+            android:id="@+id/contactDetailsEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/e_mail"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"/>
+
+        <TextView
+            android:id="@+id/contactDetailsEmail2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            android:text="@string/e_mail_2"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"/>
+
+        <TextView
+            android:id="@+id/contactDetailsDescription"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/description"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
