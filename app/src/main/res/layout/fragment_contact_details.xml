@@ -22,14 +22,14 @@
 
         <TextView
             android:id="@+id/contactDetailsName"
-            android:layout_width="207dp"
-            android:layout_height="86dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
             android:text="@string/contact_name"
             android:textColor="@android:color/black"
-            android:textSize="30sp"/>
+            android:textSize="30sp" />
     </LinearLayout>
 
     <LinearLayout
