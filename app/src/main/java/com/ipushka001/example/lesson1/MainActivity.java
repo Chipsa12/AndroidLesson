@@ -1,13 +1,21 @@
 package com.ipushka001.example.lesson1;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.Bundle;
+import android.os.IBinder;
+import com.ipushka001.example.lesson1.ContactsService.MyBinder;
 
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ServiceProvider {
+    ContactsService mService;
+    boolean mBound = false;
+    boolean createdFirstTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,12 +23,44 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar =(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if (savedInstanceState == null){
-            FragmentManager fm = getSupportFragmentManager();
-            FragmentTransaction ft = fm.beginTransaction();
-            ContactListFragment fragment = new ContactListFragment();
-            ft.add(R.id.container, fragment);
-            ft.commit();
+        Intent intent = new Intent(MainActivity.this, ContactsService.class);
+        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+        createdFirstTime = savedInstanceState == null;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(mConnection);
+    }
+
+    private ServiceConnection mConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            MyBinder binder = (MyBinder) service;
+            mService = binder.getService();
+            mBound = true;
+            if (createdFirstTime){
+                addContactListFragment();
+            }
         }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            mBound = false;
+        }
+    };
+
+    private void addContactListFragment(){
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ContactListFragment fragment = new ContactListFragment();
+        ft.add(R.id.container, fragment);
+        ft.commit();
+    }
+
+    @Override
+    public ContactsService getService() {
+        return mService;
     }
 }
