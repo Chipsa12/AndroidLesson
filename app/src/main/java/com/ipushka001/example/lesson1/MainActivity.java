@@ -10,9 +10,12 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
+
 import com.ipushka001.example.lesson1.ContactsService.MyBinder;
 
 public class MainActivity extends AppCompatActivity implements ServiceProvider {
+    final String LOG_TAG = "myLogs";
     ContactsService mService;
     boolean mBound = false;
     boolean createdFirstTime;
@@ -31,7 +34,11 @@ public class MainActivity extends AppCompatActivity implements ServiceProvider {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unbindService(mConnection);
+        if (mBound) {
+            Log.d(LOG_TAG, "Сервис уничтожен");
+            unbindService(mConnection);
+            mBound = false;
+        }
     }
 
     private ServiceConnection mConnection = new ServiceConnection() {
@@ -40,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements ServiceProvider {
             MyBinder binder = (MyBinder) service;
             mService = binder.getService();
             mBound = true;
+            Log.d(LOG_TAG, "Сервис подключен onServiceConnected()");
             if (createdFirstTime){
                 addContactListFragment();
             }
@@ -47,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements ServiceProvider {
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
+            Log.d(LOG_TAG, "Сервис отключен ");
             mBound = false;
         }
     };
@@ -61,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements ServiceProvider {
 
     @Override
     public ContactsService getService() {
+        Log.d(LOG_TAG, "Данные контактов получены ");
         return mService;
     }
 }
